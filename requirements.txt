@@ -1,0 +1,3 @@
+# Dependências para o projeto Selenium Web Scraper
+
+selenium>=4.0.0
