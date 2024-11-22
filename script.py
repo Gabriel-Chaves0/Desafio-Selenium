@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from criarCSV import CriarCSV
+from criarPlanilha import CriarPlanilha
 import time
 
 def setup_driver():
@@ -35,6 +37,10 @@ def main():
             print(f"Autor: {quote['Autor']}")
             print(f"Tags: {quote['Tags']}")
             print("-" * 40)
+        
+        #CriarCSV(quotes)   
+        CriarPlanilha(quotes) 
+
     finally:
         driver.quit()
 
