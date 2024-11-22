@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from criarCSV import CriarCSV
-from criarPlanilha import CriarPlanilha
 import time
 
 def setup_driver():
@@ -21,7 +20,7 @@ def get_all_quotes(driver):
         text = quote.find_element(By.CLASS_NAME, "text").text 
         author = quote.find_element(By.CLASS_NAME, "author").text 
         tags = [tag.text for tag in quote.find_elements(By.CLASS_NAME, "tag")]
-        quotes_data.append({"Citação": text, "Autor": author, "Tags": tags} )
+        quotes_data.append({"Citação": text, "Autor": author, "Tags": ", ".join(tags)} )
 
     return quotes_data
 
@@ -38,9 +37,7 @@ def main():
             print(f"Tags: {quote['Tags']}")
             print("-" * 40)
         
-        #CriarCSV(quotes)   
-        CriarPlanilha(quotes) 
-
+        CriarCSV(quotes)   
     finally:
         driver.quit()
 
