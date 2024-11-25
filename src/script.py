@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from criarCSV import CriarCSV
+from src.criarCSV import CriarCSV
 import time
 
 def setup_driver():
@@ -24,7 +24,7 @@ def get_all_quotes(driver):
 
     return quotes_data
 
-def main():
+def run_script():
     url = "https://quotes.toscrape.com/js-delayed/"
     driver = setup_driver()
 
@@ -40,5 +40,3 @@ def main():
         CriarCSV(quotes)   
     finally:
         driver.quit()
-
-main()
