@@ -8,6 +8,7 @@ load_dotenv()
 
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
+EMAIL_RECIVER = os.getenv("EMAIL_RECIVER")
 
 class CSVAnalyzer:
     def __init__(self, filename):
@@ -59,7 +60,7 @@ def run_analysis():
     
     sender_email = EMAIL_USER
     sender_password = EMAIL_PASS
-    recipient_email = "bielchaves2000@hotmail.com"  
+    recipient_email = EMAIL_RECIVER  
     subject = "Análise de Citações"
     body = results_text
     attachment_paths = [pdf_filename , filename]
