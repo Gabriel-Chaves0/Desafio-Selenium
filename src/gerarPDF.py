@@ -24,11 +24,14 @@ def generate_pie_charts(authors_data, tags_data):
 def generate_pdf(results_text, author_chart_path, tag_chart_path, output_pdf):
     
     pdf = FPDF()
-    pdf.title = "Análise de Citações"
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
-    pdf.set_font("Arial", size=12)
 
+    pdf.set_font("Arial", size=18, style="B")  # Fonte maior e em negrito
+    pdf.cell(0, 20, "Análise de Citações e Tags", ln=True, align="C")  # Texto centralizado
+    pdf.ln(10) 
+
+    pdf.set_font("Arial", size=12)
     pdf.multi_cell(0, 10, results_text)
 
     pdf.image(author_chart_path, x=10, y=70, w=90)  

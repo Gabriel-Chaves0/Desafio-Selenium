@@ -1,11 +1,9 @@
-import csv
+import pandas as pd
 
 def CriarCSV(quotes_data):
-    with open('citacoes.csv', 'w', newline='', encoding='utf-8') as csvfile:
-        colunas = ['Citação', 'Autor', 'Tags']
-        writer = csv.DictWriter(csvfile, fieldnames=colunas, delimiter=';') 
+    df = pd.DataFrame(quotes_data)
 
-        writer.writeheader()
+    filepath = "citacoes.csv"
+    df.to_csv(filepath, index=False, sep=";", encoding="utf-8")
 
-        for quote in quotes_data:
-            writer.writerow(quote)
+    print(f"CSV criado em: {filepath}")

@@ -1,6 +1,13 @@
 import pandas as pd
 from src.envioEmail import send_email
 from src.gerarPDF import generate_pdf, generate_pie_charts
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASS = os.getenv("EMAIL_PASS")
 
 class CSVAnalyzer:
     def __init__(self, filename):
@@ -49,9 +56,9 @@ def run_analysis():
     generate_pdf(results_text, author_chart_path, tag_chart_path, pdf_filename)
 
     print(results_text)
-
-    sender_email = "g.chaves0110@gmail.com"  
-    sender_password = "wutz glqi ipzb papg"       
+    
+    sender_email = EMAIL_USER
+    sender_password = EMAIL_PASS
     recipient_email = "bielchaves2000@hotmail.com"  
     subject = "Análise de Citações"
     body = results_text
