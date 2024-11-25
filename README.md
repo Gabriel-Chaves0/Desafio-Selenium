@@ -43,11 +43,14 @@ Este projeto combina automação web com manipulação de dados e geração de r
 
 ### **Executar o Projeto**
 
-1. **Configure as credenciais de email no arquivo `envioEmail.py`:**
-   Abra o arquivo `src/envioEmail.py` e insira o seu email e senha:
-   ```python
-   sender_email = "seuemail@gmail.com"
-   sender_password = "suasenha"
+1.Configure as credenciais no arquivo `.env`:
+
+- Crie um arquivo chamado .env na raiz do projeto.
+- Adicione as seguintes linhas ao arquivo .env com suas credenciais de email:
+```
+EMAIL_USER=seuemail@gmail.com
+EMAIL_PASS=suasenha
+```
 
 2. **Execute o arquivo principal:** 
   Rode o script principal para executar todo o fluxo do projeto:
