@@ -1,0 +1,48 @@
+import pytest
+from unittest.mock import MagicMock
+from src.script import setup_driver, open_page, get_all_quotes
+
+@pytest.fixture
+def mock_driver():
+    """Cria um mock do driver Selenium"""
+    driver = MagicMock()
+    return driver
+
+def test_setup_driver_initialization():
+    """Verifica se o driver é inicializado corretamente"""
+    driver = setup_driver()
+    assert driver is not None
+    driver.quit()
+
+def test_open_page_navigates_to_url(mock_driver):
+    """Verifica se a página é carregada corretamente"""
+    url = "https://quotes.toscrape.com/js-delayed/"
+    open_page(mock_driver, url)
+    mock_driver.get.assert_called_with(url)
+
+def test_get_all_quotes(mock_driver):
+    """Verifica se as citações são extraídas corretamente"""
+    mock_element_text = MagicMock()
+    mock_element_text.text = "A vida é bela"
+
+    mock_element_author = MagicMock()
+    mock_element_author.text = "Autor"
+
+    mock_element_tag = MagicMock()
+    mock_element_tag.text = "Filosofia"
+
+    mock_quote = MagicMock()
+    mock_quote.find_element.side_effect = lambda by, value: {
+        "text": mock_element_text,
+        "author": mock_element_author
+    }[value]
+
+    mock_quote.find_elements.return_value = [mock_element_tag]
+
+    mock_driver.find_elements.return_value = [mock_quote]
+
+    quotes = get_all_quotes(mock_driver)
+    assert len(quotes) == 1
+    assert quotes[0]["Citação"] == "A vida é bela"
+    assert quotes[0]["Autor"] == "Autor"
+    assert quotes[0]["Tags"] == "Filosofia"
